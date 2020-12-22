@@ -7,7 +7,9 @@ import google_auth_oauthlib.flow
 from google.auth.transport.requests import Request
 import googleapiclient.discovery
 
-class youtube_api():
+from discord.ext import commands
+
+class youtube_api(commands.Cog):
   """
   Contains commands to call the Youtube API
   """
@@ -135,4 +137,5 @@ default_playlist = "PLXfw-OhAIheRIwSuBzbva5nzRxCMftKz1"
 default_song = "CPhXKak_bHw"
 
 if __name__=="__main__":
-  print(youtube_api.remove_video(default_playlist, default_song))
+  #print(youtube_api.remove_video(default_playlist, default_song))
+  print(youtube_api.add_video(playlistId=default_playlist, videoId=default_song))

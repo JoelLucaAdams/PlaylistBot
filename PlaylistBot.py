@@ -7,6 +7,7 @@ from discord.ext import commands
 from discord.ext.commands import DefaultHelpCommand
 from dotenv import load_dotenv
 from cogs.utilities import Utilities
+from cogs.utilities import Youtube
 
 # logs data to the discord.log file, if this file doesn't exist at runtime it is created automatically
 logger = logging.getLogger('discord')
@@ -32,6 +33,7 @@ bot = commands.Bot(
 # Setup the General cog with the help command
 generalCog = Utilities()
 bot.add_cog(generalCog)
+bot.add_cog(Youtube())
 helpCommand.cog = generalCog
 
 

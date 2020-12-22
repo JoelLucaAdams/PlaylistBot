@@ -6,3 +6,4 @@ discord.log
 stressLevels.json
 .vscode/
 client_secrets.json
+token.pickle

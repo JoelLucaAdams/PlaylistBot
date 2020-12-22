@@ -113,7 +113,7 @@ class youtube_api():
 
     if long_video_id == None:
       return "No Video found"
-      
+
     request = youtube.playlistItems().delete(id=long_video_id)
 
     return request.execute()
@@ -129,7 +129,7 @@ class youtube_api():
     for item in playlist["items"]:
       if item["snippet"]["resourceId"]["videoId"] == videoId:
         return item["id"]
-    return None
+    return None 
 
 default_playlist = "PLXfw-OhAIheRIwSuBzbva5nzRxCMftKz1"
 default_song = "CPhXKak_bHw"

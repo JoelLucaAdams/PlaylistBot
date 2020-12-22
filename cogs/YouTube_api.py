@@ -7,10 +7,14 @@ import googleapiclient.discovery
 
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
-load_dotenv()
 api_service_name = "youtube"
 api_version = "v3"
+# Used for api key only
+'''
+load_dotenv()
 api_key = os.getenv("YT_API_KEY")
+youtube = build(api_service_name, api_version, developerKey=api_key)
+'''
 
 credentials = None
 
@@ -40,8 +44,7 @@ if not credentials or not credentials.valid:
 
 youtube = googleapiclient.discovery.build(api_service_name, api_version, credentials=credentials)
 
-# Used when api is needed
-#youtube = build(api_service_name, api_version, developerKey=api_key)
+
 """request = youtube.playlistItems().list(
   part="snippet", playlistId="PLXfw-OhAIheQ8ZVi5E_ZAYDuw7hHscH5s"
 )

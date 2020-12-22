@@ -25,7 +25,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 helpCommand = DefaultHelpCommand()
 
 bot = commands.Bot(
-    command_prefix="!yt",
+    command_prefix="!yt ",
     help_command=helpCommand
 )
 

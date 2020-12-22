@@ -101,8 +101,38 @@ class youtube_api():
 
     return request.execute()
 
+  def remove_video(playlistId: str, videoId: str):
+    """
+    Removes a video from a playlist
+    Parameters:
+      playlistId: str - the playlist's ID
+      videoId: str - the video's ID
+    """
+    youtube = youtube_api.oauth2()
+    long_video_id = youtube_api.find_video(playlistId=playlistId, videoId=videoId)
+
+    if long_video_id == None:
+      return "No Video found"
+      
+    request = youtube.playlistItems().delete(id=long_video_id)
+
+    return request.execute()
+
+  def find_video(playlistId: str, videoId: str):
+    """
+    Returns a long id for a video from a playlist
+    Parameters:
+      playlistId: str - the playlist's ID
+      videoId: str - the video's ID
+    """
+    playlist = youtube_api.playlist(playlistId)
+    for item in playlist["items"]:
+      if item["snippet"]["resourceId"]["videoId"] == videoId:
+        return item["id"]
+    return None
+
 default_playlist = "PLXfw-OhAIheRIwSuBzbva5nzRxCMftKz1"
 default_song = "CPhXKak_bHw"
 
 if __name__=="__main__":
-  print(youtube_api.add_video(default_playlist, default_song))
+  print(youtube_api.remove_video(default_playlist, default_song))

@@ -1,6 +1,12 @@
+import discord
+from cogs.youtube_api import youtube_api
 from discord.ext import commands
 from discord.ext.commands import Context
+from discord import Embed
+
 import time
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
 
 
 class Utilities(commands.Cog):
@@ -26,3 +32,31 @@ class Utilities(commands.Cog):
         """
         await ctx.send(content='Created by `Joel Adams`\n'
                                'https://github.com/JoelLucaAdams/ManPageBot')
+
+class Youtube(commands.Cog):
+    """
+    Youtube commands
+    """
+
+    @commands.command()
+    async def add(self, ctx: Context, yt_link: str):
+        """
+        Adds a song to the playlist
+        """
+        parsed = urlparse(yt_link)
+        yt_link_id = parse_qs(parsed.query)['v'][0]
+
+        playlistId ='PLXfw-OhAIheRIwSuBzbva5nzRxCMftKz1'
+
+        request = youtube_api.add_video(playlistId=playlistId, videoId=yt_link_id)
+        videoThumbnail = request['snippet']['thumbnails']['default']['url']
+        videoName = request['snippet']['title']
+
+        embed = Embed(title='Song Added!', colour=discord.Colour.red())
+        embed.set_thumbnail(url=f'{videoThumbnail}')
+
+        embed.add_field(name='Song name', value=f'{videoName}\n{yt_link}', inline=False)
+        embed.add_field(name='playlist', value='playlist name', inline=False)
+
+        embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Requested by {ctx.author.display_name}')
+        await ctx.send(embed=embed)

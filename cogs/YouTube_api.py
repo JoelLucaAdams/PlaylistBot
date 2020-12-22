@@ -7,8 +7,6 @@ import google_auth_oauthlib.flow
 from google.auth.transport.requests import Request
 import googleapiclient.discovery
 
-from discord.ext import commands
-
 class youtube_api():
   """
   Contains commands to call the Youtube API

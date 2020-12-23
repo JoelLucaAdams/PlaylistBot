@@ -133,6 +133,32 @@ class youtube_api(commands.Cog):
         return item["id"]
     return None 
 
+  def find_channel(channelId: str):
+    """
+    Returns a json object with the channels information
+    Parameters:
+      channelId: str - the playlist's ID
+    """
+    youtube = youtube_api.oauth2()
+    request = youtube.channels().list(
+        part="snippet",
+        id=channelId
+    )
+    return request.execute()
+
+  def find_playlist(playlistId: str):
+    """
+    Returns a json object with the playlists information
+    Parameters:
+      playlistId: str - the playlist's ID
+    """
+    youtube = youtube_api.oauth2()
+    request = youtube.playlists().list(
+        part="snippet",
+        id=playlistId
+    )
+    return request.execute()
+
 default_playlist = "PLXfw-OhAIheRIwSuBzbva5nzRxCMftKz1"
 default_song = "CPhXKak_bHw"
 

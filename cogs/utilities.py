@@ -58,5 +58,5 @@ class Youtube(commands.Cog):
         embed.add_field(name='Song name', value=f'{videoName}\n{yt_link}', inline=False)
         embed.add_field(name='playlist', value='playlist name', inline=False)
 
-        embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Requested by {ctx.author.display_name}')
+        embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Added by {ctx.author.display_name}')
         await ctx.send(embed=embed)

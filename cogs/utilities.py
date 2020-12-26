@@ -70,9 +70,18 @@ class Youtube(commands.Cog):
         """
         Prints a list of all playlists
         """
+        
         embed = Embed(title='Playlists available', colour=discord.Colour.green())
         i = 0
         for item in Playlists:
             embed.add_field(name=f'{i} - {item}', value=f'https://www.youtube.com/playlist?list={Playlists[item]}')
-            i = i + 1
+            i += 1
         await ctx.send(embed=embed)
+        """
+        playlist_string = ""
+        i=0
+        for item in Playlists:
+            playlist_string += f'**{i} - {item}** \nhttps://www.youtube.com/playlist?list={Playlists[item]} \n'
+            i+=1
+        await ctx.send(playlist_string)
+        """

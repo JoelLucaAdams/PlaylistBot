@@ -1,5 +1,6 @@
 import discord
 from cogs.youtube_api import youtube_api
+from cogs.youtube_api import Playlists
 from discord.ext import commands
 from discord.ext.commands import Context
 from discord import Embed

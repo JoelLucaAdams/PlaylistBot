@@ -57,8 +57,11 @@ async def on_command_error(ctx, error):
         await ctx.send('You are missing a required argument.')
     elif isinstance(error, commands.errors.CommandNotFound):
         pass
+    elif isinstance(error, commands.errors.CommandInvokeError):
+        print(error)
+        await ctx.send('Lmao, you broke something')
     else:
-        await ctx.send('You are missing a required argument.')
+        await ctx.send('I\'ve not accounted for this error type... ngl I didn\'t expect you to get this far')
         logging.error(error)
 
 # Start the bot

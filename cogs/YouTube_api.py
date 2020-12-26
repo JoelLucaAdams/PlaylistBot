@@ -30,8 +30,6 @@ class youtube_api(commands.Cog):
       token.pickle - stores login credentials (will be created if not present)
       client_secrets.json - OAuth 2.0 client ID (Will fail if not present)
     """
-    api_service_name = "youtube"
-    api_version = "v3"
     credentials = None
     scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
@@ -67,8 +65,6 @@ class youtube_api(commands.Cog):
       .env - containing a API key with the prefix YT_API_KEY
     """
     load_dotenv()
-    api_service_name = "youtube"
-    api_version = "v3"
     api_key = os.getenv("YT_API_KEY")
 
     return googleapiclient.discovery.build(youtube_api.api_service_name, youtube_api.api_version, developerKey=api_key)

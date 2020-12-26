@@ -65,7 +65,7 @@ class youtube_api(commands.Cog):
     return googleapiclient.discovery.build(api_service_name, api_version, developerKey=api_key)
 
 
-  def playlist(playlistId: str):
+  def playlist_items(playlistId: str):
     """
     Responds with a list of items in the playlist
     Parameters:
@@ -111,7 +111,7 @@ class youtube_api(commands.Cog):
       videoId: str - the video's ID
     """
     youtube = youtube_api.oauth2()
-    long_video_id = youtube_api.find_video(playlistId=playlistId, videoId=videoId)
+    long_video_id = youtube_api.find_video(playlistId=playlistId, videoId=videoId)['id']
 
     if long_video_id == None:
       return "No Video found"
@@ -122,15 +122,15 @@ class youtube_api(commands.Cog):
 
   def find_video(playlistId: str, videoId: str):
     """
-    Returns a long id for a video from a playlist
+    Returns json about a video from a playlist
     Parameters:
       playlistId: str - the playlist's ID
       videoId: str - the video's ID
     """
-    playlist = youtube_api.playlist(playlistId)
+    playlist = youtube_api.playlist_items(playlistId)
     for item in playlist["items"]:
       if item["snippet"]["resourceId"]["videoId"] == videoId:
-        return item["id"]
+        return item
     return None 
 
   def find_channel(channelId: str):
@@ -164,4 +164,4 @@ default_song = "CPhXKak_bHw"
 
 if __name__=="__main__":
   #print(youtube_api.remove_video(default_playlist, default_song))
-  print(youtube_api.add_video(playlistId=default_playlist, videoId=default_song))
+  print(youtube_api.remove_video(playlistId=default_playlist, videoId=default_song))

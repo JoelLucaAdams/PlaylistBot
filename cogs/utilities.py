@@ -39,7 +39,7 @@ class Youtube(commands.Cog):
     """
 
     @commands.command()
-    async def add(self, ctx: Context, yt_link: str):
+    async def add(self, ctx: Context, playlistId: int, yt_link: str):
         """
         Adds a song to the playlist
         """
@@ -48,7 +48,7 @@ class Youtube(commands.Cog):
         yt_link_id = parse_qs(parsed.query)['v'][0]
         yt_link_short = yt_link.split('&')[0]
 
-        playlistId ='PLXfw-OhAIheRIwSuBzbva5nzRxCMftKz1'
+        playlistId = Playlists[youtube_api.get_playlist_from_dict(playlistId)]
 
         # Calls request to add video to playlist and gets information from video
         request = youtube_api.add_video(playlistId=playlistId, videoId=yt_link_id)

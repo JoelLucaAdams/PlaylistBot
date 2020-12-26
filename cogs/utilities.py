@@ -63,3 +63,15 @@ class Youtube(commands.Cog):
         embed.add_field(name='Playlist', value=f'{playlist_name}', inline=False)
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Added by {ctx.author.display_name}')
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def playlists(self, ctx: Context):
+        """
+        Prints a list of all playlists
+        """
+        embed = Embed(title='Playlists available', colour=discord.Colour.green())
+        i = 0
+        for item in Playlists:
+            embed.add_field(name=f'{i} - {item}', value=f'https://www.youtube.com/playlist?list={Playlists[item]}')
+            i = i + 1
+        await ctx.send(embed=embed)

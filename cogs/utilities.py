@@ -43,20 +43,23 @@ class Youtube(commands.Cog):
         """
         Adds a song to the playlist
         """
+        # Split up yotube link into video ID and shortened clickable link
         parsed = urlparse(yt_link)
         yt_link_id = parse_qs(parsed.query)['v'][0]
         yt_link_short = yt_link.split('&')[0]
+
         playlistId ='PLXfw-OhAIheRIwSuBzbva5nzRxCMftKz1'
 
+        # Calls request to add video to playlist and gets information from video
         request = youtube_api.add_video(playlistId=playlistId, videoId=yt_link_id)
         video_thumbnail = request['snippet']['thumbnails']['default']['url']
         video_name = request['snippet']['title']
         playlist_name = youtube_api.find_playlist(request['snippet']['playlistId'])['items'][0]['snippet']['localized']['title']
+
+        # Creates Embed to send to discord with information on song
         embed = Embed(title='Song Added!', colour=discord.Colour.red())
         embed.set_thumbnail(url=f'{video_thumbnail}')
-
         embed.add_field(name='Song', value=f'{video_name}\nLink: {yt_link_short}', inline=False)
         embed.add_field(name='Playlist', value=f'{playlist_name}', inline=False)
-
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Added by {ctx.author.display_name}')
         await ctx.send(embed=embed)

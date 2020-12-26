@@ -14,6 +14,9 @@ class youtube_api(commands.Cog):
   Contains commands to call the Youtube API
   """
 
+  api_service_name = "youtube"
+  api_version = "v3"
+
   def oauth2():
     """
     Calls the Youtube API using OAuth 2.0 
@@ -48,7 +51,7 @@ class youtube_api(commands.Cog):
                 print('Saving Credentials for Future Use...')
                 pickle.dump(credentials, f)
 
-    return googleapiclient.discovery.build(api_service_name, api_version, credentials=credentials)
+    return googleapiclient.discovery.build(youtube_api.api_service_name, youtube_api.api_version, credentials=credentials)
 
 
   def key():
@@ -62,7 +65,7 @@ class youtube_api(commands.Cog):
     api_version = "v3"
     api_key = os.getenv("YT_API_KEY")
 
-    return googleapiclient.discovery.build(api_service_name, api_version, developerKey=api_key)
+    return googleapiclient.discovery.build(youtube_api.api_service_name, youtube_api.api_version, developerKey=api_key)
 
 
   def playlist_items(playlistId: str):

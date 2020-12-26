@@ -9,6 +9,12 @@ import googleapiclient.discovery
 
 from discord.ext import commands
 
+Playlists = {
+    "vibe" : "PLXfw-OhAIheRIwSuBzbva5nzRxCMftKz1",
+    "chill_baka_brigade" : "PLXfw-OhAIheTakyvLpf50BN9xQqhhJiN7",
+    "Programming_music" : "PLXfw-OhAIheQt4cVnX5MpPjOBy4-pXVs7"
+  }
+
 class youtube_api(commands.Cog):
   """
   Contains commands to call the Youtube API

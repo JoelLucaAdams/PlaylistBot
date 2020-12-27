@@ -49,19 +49,20 @@ class Youtube(commands.Cog):
         yt_link_id = parse_qs(parsed.query)['v'][0]
         yt_link_short = yt_link.split('&')[0]
 
-        playlistId = Playlists[youtube_api.get_playlist_from_dict(playlistId)]
+        playlistId = Playlists[youtube_api.get_playlist_key(playlistId)]
 
         # Calls request to add video to playlist and gets information from video
         request = youtube_api.add_video(playlistId=playlistId, videoId=yt_link_id)
         video_thumbnail = request['snippet']['thumbnails']['default']['url']
         video_name = request['snippet']['title']
         playlist_name = youtube_api.find_playlist(request['snippet']['playlistId'])['items'][0]['snippet']['localized']['title']
+        playlist_url = f'https://www.youtube.com/playlist?list={playlistId}'
 
         # Creates Embed to send to discord with information on song
         embed = Embed(title='Song Added!', colour=discord.Colour.red())
         embed.set_thumbnail(url=f'{video_thumbnail}')
-        embed.add_field(name='Song', value=f'{video_name}\nLink: {yt_link_short}', inline=False)
-        embed.add_field(name='Playlist', value=f'{playlist_name}', inline=False)
+        embed.add_field(name='Song', value=f'{video_name} - [link]({yt_link_short})', inline=False)
+        embed.add_field(name='Playlist', value=f'{playlist_name} - [link]({playlist_url})', inline=False)
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Added by {ctx.author.display_name}')
         await ctx.send(embed=embed)
 
@@ -74,14 +75,14 @@ class Youtube(commands.Cog):
         embed = Embed(title='Playlists available', colour=discord.Colour.green())
         i = 0
         for item in Playlists:
-            embed.add_field(name=f'{i} - {item}', value=f'https://www.youtube.com/playlist?list={Playlists[item]}')
+            embed.add_field(name=f'{i} - {item}', value=f'[link](https://www.youtube.com/playlist?list={Playlists[item]})', inline=False)
             i += 1
         await ctx.send(embed=embed)
         """
         playlist_string = ""
         i=0
         for item in Playlists:
-            playlist_string += f'**{i} - {item}** \nhttps://www.youtube.com/playlist?list={Playlists[item]} \n'
+            playlist_string += f'**{i} - {item}** - [link](https://www.youtube.com/playlist?list={Playlists[item]}) \n'
             i+=1
         await ctx.send(playlist_string)
         """

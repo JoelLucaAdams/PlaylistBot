@@ -172,9 +172,11 @@ class youtube_api(commands.Cog):
     """
     return list(Playlists)[index]
 
+"""
 default_playlist = Playlists['chill_baka_brigade']
 default_song = "CPhXKak_bHw"
 
 if __name__=="__main__":
   #print(youtube_api.remove_video(default_playlist, default_song))
   print(youtube_api.remove_video(playlistId=default_playlist, videoId=default_song))
+"""

@@ -47,7 +47,7 @@ class youtube_api(commands.Cog):
         else:
             print('Fetching New Tokens...')
             flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file('client_secrets.json', scopes=scopes)
-            flow.run_local_server(port=8080, prompt='consent', authorization_prompt_message='')
+            flow.run_console(prompt='consent', authorization_prompt_message='')
             credentials = flow.credentials
 
             # Save the credentials for the next run

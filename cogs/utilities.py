@@ -44,6 +44,9 @@ class Youtube(commands.Cog):
         """
         Adds a song to the playlist
         """
+        # delete previous message to avoid duplication
+        await ctx.message.delete()
+
         # Split up yotube link into video ID and shortened clickable link
         parsed = urlparse(yt_link)
         yt_link_id = parse_qs(parsed.query)['v'][0]

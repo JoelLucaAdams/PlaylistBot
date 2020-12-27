@@ -61,8 +61,8 @@ class Youtube(commands.Cog):
         # Creates Embed to send to discord with information on song
         embed = Embed(title='Song Added!', colour=discord.Colour.from_rgb(255, 0, 0))
         embed.set_thumbnail(url=f'{video_thumbnail}')
-        embed.add_field(name='Song', value=f'{video_name} - [link]({yt_link_short})', inline=False)
-        embed.add_field(name='Playlist', value=f'{playlist_name} - [link]({playlist_url})', inline=False)
+        embed.add_field(name='🎶 Song', value=f'{video_name} - [link]({yt_link_short})', inline=False)
+        embed.add_field(name='📼 Playlist', value=f'{playlist_name} - [link]({playlist_url})', inline=False)
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Added by {ctx.author.display_name}')
         await ctx.send(embed=embed)
 

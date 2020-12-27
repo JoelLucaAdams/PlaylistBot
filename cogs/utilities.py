@@ -50,8 +50,15 @@ class Youtube(commands.Cog):
 
         # Split up yotube link into video ID and shortened clickable link
         parsed = urlparse(yt_link)
-        yt_link_id = parse_qs(parsed.query)['v'][0]
-        yt_link_short = yt_link.split('&')[0]
+        if yt_link.__contains__('https://www.youtube.com/'):
+            yt_link_id = parse_qs(parsed.query)['v'][0]
+            yt_link_short = yt_link.split('&')[0]
+        elif yt_link.__contains__('https://youtu.be/'):
+            yt_link_id = parsed.path.split('/')[1]
+            yt_link_short = yt_link
+        else:
+            await ctx.send('Invalid url passed...')
+            raise Exception(commands.errors.BadArgument)
 
         playlistId = Playlists[youtube_api.get_playlist_key(playlistId)]
 

@@ -75,7 +75,7 @@ class Youtube(commands.Cog):
         Prints a list of all playlists
         """
         
-        embed = Embed(title='Playlists available', colour=discord.Colour.green())
+        embed = Embed(title='🎧 Playlists available', colour=discord.Colour.green())
         i = 0
         for item in Playlists:
             embed.add_field(name=f'{i} - {item}', value=f'[link](https://www.youtube.com/playlist?list={Playlists[item]})', inline=False)

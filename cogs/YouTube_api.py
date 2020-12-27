@@ -164,11 +164,13 @@ class youtube_api(commands.Cog):
     )
     return request.execute()
   
-  def get_playlist_from_dict(playlistId: int):
+  def get_playlist_key(index: int):
     """
-    Returns a list of all playlists available
+    Returns a playlist key
+    Parameters:
+      index: int - index of playlist key
     """
-    return list(Playlists)[playlistId]
+    return list(Playlists)[index]
 
 default_playlist = Playlists['chill_baka_brigade']
 default_song = "CPhXKak_bHw"

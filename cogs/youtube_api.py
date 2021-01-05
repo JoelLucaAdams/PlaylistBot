@@ -32,7 +32,14 @@ class youtube_api(commands.Cog):
     """
     credentials = None
     scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
-
+    #for debug mode
+    '''
+    flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file('client_secrets.json', scopes=scopes)
+    flow.run_local_server(port=8080, prompt='consent', authorization_prompt_message='')
+    credentials = flow.credentials
+    print(credentials.to_json())
+    return googleapiclient.discovery.build(youtube_api.api_service_name, youtube_api.api_version, credentials=credentials)
+    '''
     # token.pickle stores the user's credentials from previously successful logins
     if os.path.exists('token.pickle'):
         print('Loading Credentials From File...')
@@ -47,7 +54,7 @@ class youtube_api(commands.Cog):
         else:
             print('Fetching New Tokens...')
             flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file('client_secrets.json', scopes=scopes)
-            flow.run_console(prompt='consent', authorization_prompt_message='')
+            flow.run_local_server(port=8080, prompt='consent', authorization_prompt_message='')
             credentials = flow.credentials
 
             # Save the credentials for the next run
@@ -56,7 +63,7 @@ class youtube_api(commands.Cog):
                 pickle.dump(credentials, f)
 
     return googleapiclient.discovery.build(youtube_api.api_service_name, youtube_api.api_version, credentials=credentials)
-
+    
 
   def key():
     """

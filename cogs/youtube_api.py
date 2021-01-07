@@ -126,7 +126,7 @@ class youtube_api(commands.Cog):
       videoId: str - the video's ID
     """
     youtube = youtube_api.oauth2()
-    long_video_id = youtube_api.find_video(playlistId=playlistId, videoId=videoId)['id']
+    long_video_id = youtube_api.find_video_from_playlist(playlistId=playlistId, videoId=videoId)['id']
 
     if long_video_id == None:
       return "No Video found"
@@ -135,7 +135,7 @@ class youtube_api(commands.Cog):
 
     return request.execute()
 
-  def find_video(playlistId: str, videoId: str):
+  def find_video_from_playlist(playlistId: str, videoId: str):
     """
     Returns json about a video from a playlist
     Parameters:
@@ -148,16 +148,14 @@ class youtube_api(commands.Cog):
         return item
     return None 
 
-  def find_channel(channelId: str):
+  def find_video(videoId: str):
     """
-    Returns a json object with the channels information
-    Parameters:
-      channelId: str - the playlist's ID
+    Returns json on a video
     """
     youtube = youtube_api.oauth2()
-    request = youtube.channels().list(
-        part="snippet",
-        id=channelId
+    request = youtube.videos().list(
+        part="snippet,contentDetails",
+        id=videoId
     )
     return request.execute()
 

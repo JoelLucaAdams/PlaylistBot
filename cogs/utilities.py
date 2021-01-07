@@ -6,7 +6,8 @@ from discord.ext.commands import Context
 from discord import Embed
 
 import time
-from datetime import datetime
+import re
+from datetime import datetime, timedelta
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 
@@ -74,11 +75,29 @@ class Youtube(commands.Cog):
         playlist_name = youtube_api.find_playlist(video_added_to_playlist['snippet']['playlistId'])['items'][0]['snippet']['localized']['title']
         playlist_url = f'https://www.youtube.com/playlist?list={playlistId}'
 
+        #formats the video duration
+        hours_pattern = re.compile(r'(\d+)H')
+        minutes_pattern = re.compile(r'(\d+)M')
+        seconds_pattern = re.compile(r'(\d+)S')
+
+        hours = hours_pattern.search(video_duration)
+        minutes = minutes_pattern.search(video_duration)
+        seconds = seconds_pattern.search(video_duration)
+
+        hours = int(hours.group(1)) if hours else 0
+        minutes = int(minutes.group(1)) if minutes else 0
+        seconds = int(seconds.group(1)) if seconds else 0
+
+        if hours != 0:
+            formatted_video_time = f'{hours}:{minutes}:{seconds}'
+        else:
+            formatted_video_time = f'{minutes}:{seconds}'
+
         # Creates Embed to send to discord with information on song
         embed = Embed(title='Song Added!', colour=discord.Colour.from_rgb(255, 0, 0), timestamp=datetime.utcnow())
         embed.set_thumbnail(url=f'{video_thumbnail}')
         embed.add_field(name='🎶 Song', value=f'{video_name} - [link]({yt_link_short})', inline=False)
-        embed.add_field(name='⏱️ Song Length', value=f'{video_duration}', inline=True)
+        embed.add_field(name='⏱️ Song Length', value=f'{formatted_video_time}', inline=True)
         embed.add_field(name='📋 Channel Name', value=f'{video_channel}', inline=True)
         embed.add_field(name='📼 Playlist', value=f'{playlist_name} - [link]({playlist_url})', inline=False)
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Added by {ctx.author.display_name}')

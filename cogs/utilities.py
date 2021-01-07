@@ -66,10 +66,10 @@ class Youtube(commands.Cog):
         request = youtube_api.add_video(playlistId=playlistId, videoId=yt_link_id)
 
         request = youtube_api.find_video(videoId=yt_link_id)
-        video_thumbnail = request['snippet']['thumbnails']['standard']['url']
-        video_name = request['snippet']['title']
-        video_duration = request['contentDetails']['duration']
-        video_channel = request['snippet']['channelTitle']
+        video_thumbnail = request['items']['snippet']['thumbnails']['standard']['url']
+        video_name = request['items']['snippet']['title']
+        video_duration = request['items']['contentDetails']['duration']
+        video_channel = request['items']['snippet']['channelTitle']
 
         playlist_name = youtube_api.find_playlist(request['snippet']['playlistId'])['items'][0]['snippet']['localized']['title']
         playlist_url = f'https://www.youtube.com/playlist?list={playlistId}'

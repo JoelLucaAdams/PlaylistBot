@@ -63,7 +63,7 @@ class Youtube(commands.Cog):
         playlistId = Playlists[youtube_api.get_playlist_key(playlistId)]
 
         # Calls request to add video to playlist and gets information from video
-        request = youtube_api.add_video(playlistId=playlistId, videoId=yt_link_id)
+        video_added_to_playlist = youtube_api.add_video(playlistId=playlistId, videoId=yt_link_id)
 
         request = youtube_api.find_video(videoId=yt_link_id)
         video_thumbnail = request['items'][0]['snippet']['thumbnails']['standard']['url']
@@ -71,7 +71,7 @@ class Youtube(commands.Cog):
         video_duration = request['items'][0]['contentDetails']['duration']
         video_channel = request['items'][0]['snippet']['channelTitle']
 
-        playlist_name = youtube_api.find_playlist(request['snippet']['playlistId'])['items'][0]['snippet']['localized']['title']
+        playlist_name = youtube_api.find_playlist(video_added_to_playlist['snippet']['playlistId'])['items'][0]['snippet']['localized']['title']
         playlist_url = f'https://www.youtube.com/playlist?list={playlistId}'
 
         # Creates Embed to send to discord with information on song

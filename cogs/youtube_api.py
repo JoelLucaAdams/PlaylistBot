@@ -10,9 +10,12 @@ import googleapiclient.discovery
 from discord.ext import commands
 
 Playlists = {
+    "chill - baka brigade" : "PLXfw-OhAIheTakyvLpf50BN9xQqhhJiN7",
     "vibe" : "PLXfw-OhAIheRIwSuBzbva5nzRxCMftKz1",
-    "chill_baka_brigade" : "PLXfw-OhAIheTakyvLpf50BN9xQqhhJiN7",
-    "Programming_music" : "PLXfw-OhAIheQt4cVnX5MpPjOBy4-pXVs7"
+    "Programming_music" : "PLXfw-OhAIheQt4cVnX5MpPjOBy4-pXVs7",
+    "EDM": "PLXfw-OhAIheShH-C1eiLmOy7ARW3iMbSB",
+    "Folk": "PLXfw-OhAIheRTx637DsQ8xKvNMq8h9TU1",
+    "Bass boosted": "PLXfw-OhAIheR1vbjC3x7vEPeTIYhYu5RP"
   }
 
 class youtube_api(commands.Cog):

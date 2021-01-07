@@ -7,7 +7,7 @@ from discord import Embed
 
 import time
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 
@@ -42,7 +42,7 @@ class Youtube(commands.Cog):
     """
 
     @commands.command()
-    async def add(self, ctx: Context, playlistId: int, yt_link: str):
+    async def add(self, ctx: Context, playlist_index: int, yt_link: str):
         """
         Adds a song to the playlist
         """
@@ -61,7 +61,7 @@ class Youtube(commands.Cog):
             await ctx.send('Invalid url passed...')
             raise Exception(commands.errors.BadArgument)
 
-        playlistId = Playlists[youtube_api.get_playlist_key(playlistId)]
+        playlistId = Playlists[youtube_api.get_local_playlist_key(playlist_index)]
 
         # Calls request to add video to playlist and gets information from video
         video_added_to_playlist = youtube_api.add_video(playlistId=playlistId, videoId=yt_link_id)
@@ -74,6 +74,8 @@ class Youtube(commands.Cog):
 
         playlist_name = youtube_api.find_playlist(video_added_to_playlist['snippet']['playlistId'])['items'][0]['snippet']['localized']['title']
         playlist_url = f'https://www.youtube.com/playlist?list={playlistId}'
+
+        playlist_length = youtube_api.get_playlist_length(playlistId)
 
         #formats the video duration
         hours_pattern = re.compile(r'(\d+)H')
@@ -100,6 +102,7 @@ class Youtube(commands.Cog):
         embed.add_field(name='⏱️ Song Length', value=f'{formatted_video_time}', inline=True)
         embed.add_field(name='📋 Channel Name', value=f'{video_channel}', inline=True)
         embed.add_field(name='📼 Playlist', value=f'{playlist_name} - [link]({playlist_url})', inline=False)
+        embed.add_field(name='⏱️ Playlist Length', value=f'{playlist_length}', inline=True)
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Added by {ctx.author.display_name}')
         await ctx.send(embed=embed)
 
@@ -115,11 +118,3 @@ class Youtube(commands.Cog):
             embed.add_field(name=f'{i} - {item}', value=f'[link](https://www.youtube.com/playlist?list={Playlists[item]})', inline=False)
             i += 1
         await ctx.send(embed=embed)
-        """
-        playlist_string = ""
-        i=0
-        for item in Playlists:
-            playlist_string += f'**{i} - {item}** - [link](https://www.youtube.com/playlist?list={Playlists[item]}) \n'
-            i+=1
-        await ctx.send(playlist_string)
-        """

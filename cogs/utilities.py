@@ -101,7 +101,8 @@ class Youtube(commands.Cog):
         embed.add_field(name='🎶 Song', value=f'{video_name} - [link]({yt_link_short})', inline=False)
         embed.add_field(name='⏱️ Song Length', value=f'{formatted_video_time}', inline=True)
         embed.add_field(name='📋 Channel Name', value=f'{video_channel}', inline=True)
-        embed.add_field(name='📼 Playlist', value=f'{playlist_name} - [link]({playlist_url})', inline=False)
+        
+        embed.add_field(name='📼 Playlist', value=f'{playlist_name} - [link]({playlist_url})', inline=True)
         embed.add_field(name='⏱️ Playlist Length', value=f'{playlist_length}', inline=True)
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Added by {ctx.author.display_name}')
         await ctx.send(embed=embed)

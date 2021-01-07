@@ -152,7 +152,7 @@ class youtube_api(commands.Cog):
     """
     Returns json on a video
     """
-    youtube = youtube_api.oauth2()
+    youtube = youtube_api.key()
     request = youtube.videos().list(
         part="snippet,contentDetails",
         id=videoId

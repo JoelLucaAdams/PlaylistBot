@@ -203,7 +203,7 @@ class youtube_api(commands.Cog):
     while True:
         pl_request = youtube.playlistItems().list(
             part='contentDetails',
-            playlistId="PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU",
+            playlistId=playlistId,
             maxResults=100,
             pageToken=nextPageToken
         )

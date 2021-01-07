@@ -117,7 +117,7 @@ class Youtube(commands.Cog):
         i = 0
         for item in Playlists:
             playlist_length = youtube_api.get_playlist_length(Playlists[item])
-            embed.add_field(name=f'{i} - {item}', value=f'[link](https://www.youtube.com/playlist?list={Playlists[item]})', inline=False)
+            embed.add_field(name=f'{i} - {item}', value=f'[link](https://www.youtube.com/playlist?list={Playlists[item]})', inline=True)
             embed.add_field(name='⏱️ Playlist Length', value=f'{playlist_length}', inline=True)
             i += 1
         await ctx.send(embed=embed)

@@ -16,4 +16,6 @@ Users can add songs to playlists using the following commands:
 
 ## Preview of the bot working
 
-![Preview](https://raw.githubusercontent.com/JoelLucaAdams/ManPageBot/main/Preview.png)
+![Adding songs preview](https://github.com/JoelLucaAdams/PlaylistBot/blob/main/adding_song_preview.png)
+
+![PLaylists preview](https://github.com/JoelLucaAdams/PlaylistBot/blob/main/playlists_preview.png)

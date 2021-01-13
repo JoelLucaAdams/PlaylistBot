@@ -8,9 +8,11 @@ Before using the bot you must create a `.env` file which includes the line `DISC
 
 ## Usage
 
-Users can query man pages using the following commands:
+Users can add songs to playlists using the following commands:
 
-`!yt add <youtube-link>` - allows user to add music to a public playlist
+`!yt add <playlist_index> <youtube_link>` - allows user to add music to a public playlist
+
+`!yt playlists` - prints off a list of all the playlists available  
 
 ## Preview of the bot working
 
